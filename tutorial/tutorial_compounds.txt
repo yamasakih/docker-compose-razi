@@ -1,0 +1,3 @@
+chembl_id	canonical_smiles	standard_inchi	standard_inchi_key
+CHEMBL153534	Cc1cc(cn1C)c2csc(N=C(N)N)n2	InChI=1S/C10H13N5S/c1-6-3-7(4-15(6)2)8-5	<snip>
+CHEM1BL440060	CC[C@H](C)[C@H](NC(=O)[C@H](CC(C)C)NC(=O)[C@@H](NC(=O)[C@@H](N)CCSC)	<snip>	<snip>
