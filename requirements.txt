@@ -1,1 +1,2 @@
 jupyter
+psycopg2==2.7.3.2
