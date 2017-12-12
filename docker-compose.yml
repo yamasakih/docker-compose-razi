@@ -8,7 +8,7 @@ services:
     build: .
     command: jupyter notebook --no-browser --port 8888 --allow-root --ip=0.0.0.0 --NotebookApp.token=${TOKEN} --NotebookApp.password=${PASS}
     volumes:
-      - .:/code
+      - ./work:/code
     ports:
       - "8888:8888"
     depends_on:
