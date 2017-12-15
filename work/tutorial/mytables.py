@@ -41,3 +41,7 @@ class Compound(Base):
         if isinstance(self.structure, Chem.Mol):
             return '(%s) < %s >' % (self.name, Chem.MolToSmiles(self.structure))
         return '(%s) < %s >' % (self.name, self.structure)
+
+
+if __name__ == '__main__':
+    Base.metadata.create_all()
