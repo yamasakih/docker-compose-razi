@@ -28,11 +28,10 @@ class Compound(Base):
     
     def __init__(self, name, structure):
         self.name = name
-        self.structure = structure
-        if isinstance(self.structure, str):
-            mol = Chem.MolFromSmiles(self.structure)
-        else:
-            mol = self.structure
+        if isinstance(structure, Chem.Mol):
+            self.structure = Chem.MolToSmiles(structure)
+        elif isinstance(structure, str):
+            self.structure = structure
         self.atompair = atompairbv_fp(self.structure)
         self.torsion = torsionbv_fp(self.structure)
         self.morgan = morganbv_fp(self.structure, 2)
