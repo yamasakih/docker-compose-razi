@@ -2,8 +2,6 @@ version: '2'
 services:
   db:
     image: informaticsmatters/rdkit_cartridge 
-    volumes:
-      - ./data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
   web:
