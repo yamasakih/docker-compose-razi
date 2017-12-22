@@ -55,7 +55,7 @@ You can use postgresql command by simply adding `docker-compose exec db` at the 
 (Change YOUR_DATABASE_NAME to created database name)
 
 ```
-> $ docker-compose exec db createdb -U postgres tutorial
+> $ docker-compose exec db createdb -U postgres YOUR_DATABASE_NAME
 ```
 
 ### 4. Extend the database
@@ -64,7 +64,7 @@ You can use postgresql command by simply adding `docker-compose exec db` at the 
 (Change YOUR_DATABASE_NAME to created database name or postgres (default database name))
 
 ```
-> $ docker-compose exec db psql -U postgres -c 'create extension rdkit' postgres
+> $ docker-compose exec db psql -U postgres -c 'create extension rdkit' YOUR_DATABASE_NAME
 CREATE EXTENSION
 ```
 
