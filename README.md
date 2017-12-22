@@ -32,39 +32,11 @@ docker-compose up -d
 
 ```
 > $ docker-compose up -d
-Building web
-Step 1/9 : FROM kubor/alpine-rdkit
- ---> e204cd64867b
-Step 2/9 : RUN apk add --no-cache git
- ---> Using cache
- ---> 2a4dd71a32de
-Step 3/9 : ENV PYTHONUNBUFFERED 1
- ---> Using cache
- ---> 94d37711a020
-Step 4/9 : RUN mkdir /code
- ---> Using cache
- ---> 29eba93d19e3
-Step 5/9 : WORKDIR /code
- ---> Using cache
- ---> 2c39f3a58382
-Step 6/9 : ADD requirements.txt /code/
- ---> Using cache
- ---> b78f5f28252e
-Step 7/9 : RUN pip install -r requirements.txt
- ---> Using cache
- ---> e9e280e6de32
-Step 8/9 : RUN pip install git+https://github.com/rdkit/django-rdkit.git
- ---> Using cache
- ---> 3aba85854ed2
-Step 9/9 : ADD . /code/
- ---> 63843c8a3ab1
-Successfully built 63843c8a3ab1
-Successfully tagged dockercomposedjangordkit_web:latest
-WARNING: Image for service web was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
-Creating dockercomposedjangordkit_db_1 ... 
-Creating dockercomposedjangordkit_db_1 ... done
-Creating dockercomposedjangordkit_web_1 ... 
-Creating dockercomposedjangordkit_web_1 ... done
+Creating network "dockercomposerazi_default" with the default driver
+Creating dockercomposerazi_db_1 ... 
+Creating dockercomposerazi_db_1 ... done
+Creating dockercomposerazi_web_1 ... 
+Creating dockercomposerazi_web_1 ... done
 ```
 
 Please access `http://0.0.0.0:8888` or `http://localhost:8888`, then you can run Jupyter Notebook.
@@ -78,30 +50,42 @@ Restarting dockercomposedjangordkit_db_1  ... done
 ```
 
 ### 3. Creating the database
-First, extension database initialize the database by `createdb`.  
-You can use postgresql command by simply adding `docker-compose run db` at the beginning.
+If you want, create database by command `createdb`.
+You can use postgresql command by simply adding `docker-compose exec db` at the beginning.
+(Change YOUR_DATABASE_NAME to created database name.)
 
 ```
-> $ docker-compose run db createdb
-Starting dockercomposedjangordkit_db_1 ... done
-Operations to perform:
-  Apply all migrations: admin, auth, contenttypes, django_rdkit, sessions
-Running migrations:
-  Applying contenttypes.0001_initial... OK
-  Applying auth.0001_initial... OK
-  Applying admin.0001_initial... OK
-  Applying admin.0002_logentry_remove_auto_add... OK
-  Applying contenttypes.0002_remove_content_type_name... OK
-  Applying auth.0002_alter_permission_name_max_length... OK
-  Applying auth.0003_alter_user_email_max_length... OK
-  Applying auth.0004_alter_user_username_opts... OK
-  Applying auth.0005_alter_user_last_login_null... OK
-  Applying auth.0006_require_contenttypes_0002... OK
-  Applying auth.0007_alter_validators_add_error_messages... OK
-  Applying auth.0008_alter_user_username_max_length... OK
-  Applying django_rdkit.0001_setup... OK
-  Applying sessions.0001_initial... OK```
+> $ docker-compose exec db createdb -U postgres tutorial
 ```
 
+### 4. Extend the database
+Next, extend your database by command `create extension rdkit` for using RDKit database cartridge.
+You can use postgresql command by simply adding `docker-compose exec db` at the beginning.
+(Change YOUR_DATABASE_NAME to created database name or postgres (default database name).)
 
-For more information, please see tutorial.
+```
+> $ docker-compose exec db psql -U postgres -c 'create extension rdkit' postgres
+CREATE EXTENSION
+```
+
+### 5. Delete mount volume
+This Docker-compose uses named volume. 
+If it becomes unnecessary, delete it with the following command.
+
+```
+> $ docker volume list
+DRIVER              VOLUME NAME
+local               dockercomposerazi_dbdata
+```
+
+```
+> $ docker volume rm dockercomposerazi_dbdata 
+dockercomposerazi_dbdata
+```
+
+```
+> $ docker volume list                        
+DRIVER              VOLUME NAME
+```
+
+For more information, please see [tutorial](https://github.com/yamasakih/docker-compose-razi/tree/master/work/tutorial).
