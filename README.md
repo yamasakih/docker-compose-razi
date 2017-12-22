@@ -50,18 +50,18 @@ Restarting dockercomposedjangordkit_db_1  ... done
 ```
 
 ### 3. Creating the database
-If you want, create database by command `createdb`.
-You can use postgresql command by simply adding `docker-compose exec db` at the beginning.
-(Change YOUR_DATABASE_NAME to created database name.)
+If you want, create database by command `createdb`.  
+You can use postgresql command by simply adding `docker-compose exec db` at the beginning.  
+(Change YOUR_DATABASE_NAME to created database name)
 
 ```
 > $ docker-compose exec db createdb -U postgres tutorial
 ```
 
 ### 4. Extend the database
-Next, extend your database by command `create extension rdkit` for using RDKit database cartridge.
-You can use postgresql command by simply adding `docker-compose exec db` at the beginning.
-(Change YOUR_DATABASE_NAME to created database name or postgres (default database name).)
+Next, extend your database by command `create extension rdkit` for using RDKit database cartridge.  
+You can use postgresql command by simply adding `docker-compose exec db` at the beginning.  
+(Change YOUR_DATABASE_NAME to created database name or postgres (default database name))
 
 ```
 > $ docker-compose exec db psql -U postgres -c 'create extension rdkit' postgres
@@ -69,7 +69,7 @@ CREATE EXTENSION
 ```
 
 ### 5. Delete mount volume
-This Docker-compose uses named volume. 
+This Docker-compose uses named volume.  
 If it becomes unnecessary, delete it with the following command.
 
 ```
