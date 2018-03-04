@@ -4,6 +4,8 @@ services:
     image: informaticsmatters/rdkit_cartridge 
     volumes:
       - dbdata:/var/lib/postgresql/data
+      - ./postgresql.conf:/etc/postgresql.conf
+    command: 'postgres -c config_file="/etc/postgresql.conf"'
     ports:
       - "5432:5432"
   web:
