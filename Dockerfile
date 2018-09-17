@@ -1,8 +1,10 @@
 FROM jupyter/scipy-notebook 
 
+ENV PYTHONBUFFERED 1
+
 USER root
 RUN conda install -c rdkit rdkit
-ENV PYTHONBUFFERED 1
+RUN conda install -c conda-forge molvs
 
 RUN mkdir /code
 WORKDIR /code
