@@ -56,11 +56,6 @@ docker-compose exec -T db psql -U postgres -c "alter table compounds add foreign
 echo 'Create index to structure column...'
 docker-compose exec -T db psql -U postgres -c "create index structure_idx on compounds using gist(structure)" souyakuRB2018
 
-# Create index to structure column.
-# It takes about an hour on my pc.
-echo 'Create index to structure column...'
-docker-compose exec -T db psql -U postgres -c "create index structure_idx on compounds using gist(structure)" souyakuRB2018
-
 # Create index to fingerprint column.
 # It takes about an hour on my pc.
 echo 'Create index to mfp2 column...'
